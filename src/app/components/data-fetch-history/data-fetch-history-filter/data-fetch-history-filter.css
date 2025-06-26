@@ -1,0 +1,12 @@
+::ng-deep .button-search .p-button {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: #f5f5f5 !important;
+  color: #414651;
+  border: 1px solid #d5d7da !important;
+}
+
+/* PrimeNG p-select placeholder styling */
+::ng-deep .custom-placeholder input::placeholder {
+  color: #d5d7da !important;
+}

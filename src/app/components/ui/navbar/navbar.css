@@ -1,0 +1,61 @@
+/* Logo custom styling */
+.p-logo {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1/1;
+  background-color: #e9eaeb;
+  border-radius: 8px;
+}
+
+/* Custom Menu button styles */
+.menu-button-color {
+  color: #717680;
+}
+
+/* Custom breadcrumb styles */
+.breadcrumb-custom {
+  padding: 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* Avatar custom styling */
+.avatar-custom {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: #d0ecdde6;
+  color: #006d36;
+}
+
+/* Menu popup styling */
+::ng-deep .p-menu .p-menuitem-link {
+  padding: 0.75rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+}
+
+::ng-deep .p-menu .p-menuitem-icon {
+  margin-right: 0.5rem !important;
+  color: #6b7280 !important;
+}
+
+/* User info styling */
+.user-name {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: #181d27;
+}
+
+.user-id {
+  font-size: 12px;
+  font-style: normal;
+  font-style: italic;
+  font-weight: 500;
+  color: #00803f;
+}

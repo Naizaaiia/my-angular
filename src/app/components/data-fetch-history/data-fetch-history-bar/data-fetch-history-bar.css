@@ -1,0 +1,39 @@
+/* Text header styling */
+.text-header {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Badge styling */
+.badge-custom {
+  background: #d0ecdd;
+  color: #00592c;
+  border-radius: 16px;
+}
+
+/* Button styling */
+::ng-deep .button-order .p-button {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: #f8f9fc !important;
+  color: #363f72;
+  border: 1px solid #363f72 !important;
+}
+
+::ng-deep .button-item .p-button {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: #fff6ed !important;
+  color: #c4320a;
+  border: 1px solid #c4320a !important;
+}
+
+::ng-deep .button-export .p-button {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: #006d36 !important;
+  color: #ffffff;
+  border: 1px solid #006d36 !important;
+}

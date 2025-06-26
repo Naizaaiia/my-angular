@@ -1,0 +1,71 @@
+<!-- Navbar Container -->
+<div
+  class="fixed top-0 left-0 right-0 z-[1000] bg-white border-b border-gray-200 shadow-sm"
+>
+  <div class="flex items-center justify-between px-4 py-1">
+    <!-- Left Section: Logo + Hamburger Menu + Breadcrumb -->
+    <div class="flex items-center">
+      <!-- Logo -->
+      <div class="p-logo"></div>
+
+      <!-- Hamburger Menu -->
+      <p-button
+        class="pl-4"
+        icon="pi pi-bars text-gray-500"
+        [text]="true"
+        severity="secondary"
+        (click)="menu.toggle($event)"
+        #menuButton
+      />
+
+      <p-menu #menu [model]="items" [popup]="true" />
+
+      <!-- Breadcrumb -->
+      <p-breadcrumb class="breadcrumb-custom" [model]="breadcrumbItems">
+        <ng-template #item let-item>
+          <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route">
+              <span
+                [ngClass]="[item.icon ? item.icon : '', 'text-gray-700']"
+              ></span>
+              <span class="text-gray-700">{{ item.label }}</span>
+            </a>
+          </ng-container>
+          <ng-template #elseBlock>
+            <a [href]="item.url">
+              <span class="text-gray-500">{{ item.label }}</span>
+            </a>
+          </ng-template>
+        </ng-template>
+      </p-breadcrumb>
+    </div>
+
+    <!-- Right Section: Notification + User Profile -->
+    <div class="flex items-center gap-4">
+      <!-- Notification Bell -->
+      <p-button icon="pi pi-bell" [text]="true" severity="secondary" />
+
+      <!-- User Profile Section -->
+      <div
+        class="flex items-center space-x-2 cursor-pointer bg-gray-50 px-2 py-1 rounded-lg"
+        (click)="userMenu.toggle($event)"
+        #userMenuButton
+      >
+        <!-- User Avatar -->
+        <p-avatar label="กอ" shape="circle" class="avatar-custom" />
+
+        <!-- User Info -->
+        <div class="w-22">
+          <div class="user-name">กอไก่ ออกไข่...</div>
+          <div class="user-id">i1234567</div>
+        </div>
+
+        <!-- Dropdown Arrow -->
+        <i class="pi pi-chevron-down text-xs text-gray-400"></i>
+      </div>
+
+      <!-- User Dropdown Menu -->
+      <p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
+    </div>
+  </div>
+</div>

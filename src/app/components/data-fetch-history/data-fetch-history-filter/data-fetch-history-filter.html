@@ -1,0 +1,88 @@
+<div
+  class="card bg-white border-x-1 border-t-1 border-gray-200 rounded-t-xl px-4 py-3"
+>
+  <form
+    #formRef="ngForm"
+    (ngSubmit)="onSubmit(formRef)"
+    class="w-full grid grid-cols-13 space-x-4"
+  >
+    <div class="flex flex-col col-span-3">
+      <label class="text-xs font-medium block mb-1.5">
+        ช่วงเวลาที่ทำรายการ
+      </label>
+      <p-datepicker
+        name="date"
+        [showIcon]="true"
+        [(ngModel)]="date"
+        [dateFormat]="'dd/mm/yy'"
+        [selectionMode]="'range'"
+        inputId="date"
+        placeholder="เลือกช่วงเวลา"
+        showIcon
+        iconDisplay="input"
+        size="small"
+        class="w-full custom-placeholder"
+        styleClass="w-full"
+      />
+    </div>
+    <div class="flex flex-col col-span-3">
+      <label class="text-xs font-medium block mb-1.5"> ประเภทงาน </label>
+      <p-select
+        id="jobType"
+        name="jobType"
+        [options]="mockData"
+        [(ngModel)]="selectedJobType"
+        optionLabel="name"
+        placeholder="เลือกประเภทงาน"
+        size="small"
+        class="w-full"
+      />
+    </div>
+    <div class="flex flex-col col-span-3">
+      <label class="text-xs font-medium block mb-1.5"> ผลการดึงข้อมูล </label>
+      <p-select
+        id="result"
+        name="result"
+        [options]="mockData"
+        [(ngModel)]="selectedResult"
+        optionLabel="name"
+        placeholder="เลือกผลการดึงข้อมูล"
+        size="small"
+        class="w-full"
+      />
+    </div>
+    <div class="flex flex-col col-span-3">
+      <label class="text-xs font-medium block mb-1.5">
+        ผู้ที่สั่งดึงข้อมูล
+      </label>
+      <div class="relative">
+        <i
+          class="pi pi-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 z-10 text-sm"
+        ></i>
+        <p-select
+          id="user"
+          name="user"
+          [options]="mockUsers"
+          [(ngModel)]="selectedUser"
+          optionLabel="name"
+          placeholder="กรอกรหัส หรือชื่อพนักงาน"
+          editable="true"
+          size="small"
+          class="w-full pl-7 custom-placeholder"
+        />
+      </div>
+    </div>
+    <div class="flex col-span-1 items-end pt-4">
+      <p-button
+        type="submit"
+        label="ค้นหา"
+        size="small"
+        icon="pi pi-search"
+        variant="outlined"
+        severity="secondary"
+        class="button-search w-full"
+        styleClass="w-full"
+      />
+    </div>
+  </form>
+</div>

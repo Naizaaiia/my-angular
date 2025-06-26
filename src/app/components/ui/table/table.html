@@ -1,0 +1,182 @@
+<div class="bg-white border border-gray-200 rounded-b-xl">
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="table-header">
+          <th class="w-1.5/12">
+            <p>วัน/เวลาที่</p>
+            <p>ทำรายการ</p>
+          </th>
+          <th class="w-1.5/12">ประเภทกอน</th>
+          <th class="w-4/12">จำนวนรายการ</th>
+          <th class="w-2/12">ผู้ที่สั่งดึงข้อมูล</th>
+          <th class="w-2/12">หมายเลขของดึงข้อมูล</th>
+          <th class="w-1/12"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of dataFetchHistory"
+          class="border-b border-gray-100 hover:bg-gray-50"
+        >
+          <!-- วัน/เวลา -->
+          <td class="px-4 py-4 align-middle">
+            <div class="flex flex-col gap-0.5">
+              <div class="text-sm text-gray-900">{{ item.date }}</div>
+              <div class="italic text-sm text-gray-500">{{ item.time }}</div>
+            </div>
+          </td>
+
+          <!-- ประเภทกอน -->
+          <td class="px-4 py-4 align-middle">
+            <div
+              class="inline-block px-2 py-1 rounded-xl text-xs font-medium"
+              [ngClass]="{
+                   'status-withdraw-completed': item.withdrawStatus === 'completed',
+                   'status-withdraw-error': item.withdrawStatus === 'error'
+                 }"
+            >
+              {{ getStatusText(item.status) }}
+            </div>
+          </td>
+
+          <!-- จำนวนรายการ -->
+          <td class="px-4 py-4 flex items-center align-middle gap-x-8">
+            <div class="flex flex-col">
+              <div class="font-medium text-sm text-gray-700">
+                {{ item.totalItems }}
+                <span class="text-xs text-gray-400">รายการ</span>
+              </div>
+
+              <!-- Progress Bars -->
+              <div class="flex gap-1">
+                <ng-container *ngFor="let bar of item.bars">
+                  <div
+                    class="w-1.5 h-6 rounded"
+                    [ngClass]="bar === 'success' ? 'progress-bar-success' : 'progress-bar-error'"
+                  ></div>
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex flex-col gap-[1px]">
+              <!-- Success -->
+              <div class="font-medium text-[10px] text-gray-400">สำเร็จ</div>
+              <div class="flex items-center text-xs">
+                <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                <span class="font-medium text-gray-900 pl-1.5"
+                  >{{ item.successPercentage }}%</span
+                >
+                <span class="text-gray-500 pl-4"
+                  >{{ item.successCount }} รายการ</span
+                >
+              </div>
+
+              <!-- Error -->
+              <div class="font-medium text-[10px] text-gray-400">ล้มเหลว</div>
+              <div class="flex items-center text-xs">
+                <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                <span class="font-medium text-gray-900 pl-1.5"
+                  >{{ item.errorPercentage }}%</span
+                >
+                <span class="text-gray-500 pl-4"
+                  >{{ item.errorCount }} รายการ</span
+                >
+              </div>
+            </div>
+          </td>
+
+          <!-- ผู้ที่สั่งดึงข้อมูล -->
+          <td class="px-4 py-4 align-middle">
+            <div class="flex items-center gap-3">
+              <div
+                class="avatar"
+                [ngClass]="{'system-avatar': item.executor.name === 'System'}"
+              >
+                <span *ngIf="item.executor.name !== 'System'"
+                  >{{ item.executor.initials }}</span
+                >
+                <i
+                  *ngIf="item.executor.name === 'System'"
+                  class="pi pi-cog"
+                ></i>
+              </div>
+              <div class="flex flex-col gap-0.5">
+                <div class="font-medium text-sm text-gray-900">
+                  {{ item.executor.name }}
+                </div>
+                <div
+                  class="text-xs italic"
+                  [ngClass]="{
+                  'executor-id-system': item.executor.name === 'System',
+                  'executor-id': item.executor.name !== 'System'
+                }"
+                >
+                  {{ item.executor.id }}
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <!-- หมายเลขของดึงข้อมูล -->
+          <td class="px-4 py-4 align-middle">
+            <div class="inline-block">
+              <div
+                class="reference-badge"
+                [ngClass]="getStatusBadgeClass(item.status)"
+              >
+                <span class="status-dot" [ngClass]="item.status"></span>
+                {{ item.referenceNumber }}
+              </div>
+            </div>
+          </td>
+
+          <!-- Actions -->
+          <td class="p-2 align-middle">
+            <div class="flex justify-center items-center">
+              <app-drawer-detail [dataFetchHistory]="item" />
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Custom Paginator -->
+  <div class="flex justify-between items-center px-6 pt-3 pb-4">
+    <!-- Previous Button -->
+    <button
+      class="paginator-nav-btn"
+      [disabled]="currentPage === 1"
+      (click)="goToPreviousPage()"
+    >
+      <i class="pi pi-arrow-left text-xs"></i>
+      <span>ก่อนหน้า</span>
+    </button>
+
+    <!-- Page Numbers -->
+    <div class="flex items-center gap-1">
+      <button
+        *ngFor="let page of getPageNumbers()"
+        class="paginator-page-btn"
+        [class.active]="page === currentPage"
+        [class.dots]="page === '...'"
+        [disabled]="page === '...'"
+        (click)="goToPage(page)"
+      >
+        {{ page }}
+      </button>
+    </div>
+
+    <!-- Next Button -->
+    <button
+      class="paginator-nav-btn"
+      [disabled]="currentPage === totalPages"
+      (click)="goToNextPage()"
+    >
+      <span>ถัดไป</span>
+      <i class="pi pi-arrow-right"></i>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,195 @@
+::ng-deep .button-close .p-button {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  background: #006d36 !important;
+  color: #ffffff;
+  border: 1px solid #006d36 !important;
+  padding: 0.5rem 2rem !important;
+}
+
+/* Process Type Column */
+.status-withdraw-completed {
+  background: #ffffff;
+  color: #363f72;
+  border: 1px solid #363f72;
+}
+
+.status-withdraw-error {
+  background: #fff6ed;
+  color: #c4320a;
+  border: 1px solid #c4320a;
+}
+
+.process-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-badge-completed {
+  background: #ecfdf3;
+  color: #027a48;
+}
+
+.status-badge-processing {
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.status-badge-error {
+  background: #fef3f2;
+  color: #b42318;
+}
+
+/* Items Column */
+.items-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 200px;
+}
+
+.total-items {
+  font-weight: 600;
+  font-size: 14px;
+  color: #212529;
+}
+
+.progress-container {
+  width: 100%;
+}
+
+.progress-bar {
+  display: flex;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-segment {
+  height: 100%;
+}
+
+.progress-segment.success {
+  background: #12b76a;
+}
+
+.progress-segment.error {
+  background: #dc3545;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.success-stats,
+.error-stats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-dot.success {
+  background: #12b76a;
+}
+
+.status-dot.error {
+  background: #dc3545;
+}
+
+.percentage {
+  font-weight: 600;
+  color: #212529;
+}
+
+.count {
+  color: #6c757d;
+}
+
+.progress-bar-success {
+  background: #47cd89;
+}
+
+.progress-bar-error {
+  background: #f97066;
+}
+
+/* Executor Column */
+.executor-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #d0ecdd;
+  color: #006d36;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.system-avatar {
+  background: #535862;
+  color: #ffffff;
+}
+
+.executor-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.executor-id-system {
+  color: #b99b5e;
+}
+
+.executor-id {
+  color: #00803f;
+}
+
+/* Reference Column */
+.reference-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.reference-badge .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.reference-badge .status-dot.completed {
+  background: #12b76a;
+}
+
+.reference-badge .status-dot.processing {
+  background: #f79009;
+}
+
+.reference-badge .status-dot.error {
+  background: #f04438;
+}

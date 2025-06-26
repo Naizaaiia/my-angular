@@ -1,0 +1,148 @@
+<p-drawer
+  #drawerRef
+  [(visible)]="visible"
+  position="right"
+  styleClass="!w-full md:!w-80 lg:!w-[30rem] rounded-lg mt-2 mr-2 ml-2 !max-h-[calc(100vh-1rem)]"
+>
+  <ng-template #header>
+    <div class="flex items-center px-4 gap-2">
+      <p class="font-medium text-lg text-gray-900">
+        รายละเอียดการเชื่อมต่อข้อมูล
+      </p>
+      <div class="inline-block">
+        <div
+          class="reference-badge"
+          [ngClass]="getStatusBadgeClass(dataFetchHistory.status)"
+        >
+          <span class="status-dot" [ngClass]="dataFetchHistory.status"></span>
+          {{ dataFetchHistory.referenceNumber }}
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <div class="flex flex-col gap-4 px-4">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="flex flex-col gap-1">
+        <p class="text-sm text-gray-500">วัน/เวลาที่ทำรายการ</p>
+        <p class="text-sm text-gray-900">
+          {{ dataFetchHistory.date }} {{ dataFetchHistory.time }}
+        </p>
+      </div>
+      <div class="flex flex-col gap-1 inline-block">
+        <p class="text-sm text-gray-500">ประเภทงาน</p>
+        <div
+          class="inline-block px-2 py-1 rounded-xl text-xs font-medium"
+          [ngClass]="{
+            'status-withdraw-completed': dataFetchHistory.withdrawStatus === 'completed',
+            'status-withdraw-error': dataFetchHistory.withdrawStatus === 'error'
+          }"
+        >
+          {{ getStatusText(dataFetchHistory.status) }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="bg-gray-50 rounded-xl p-4 flex items-center align-middle gap-x-8"
+    >
+      <div class="flex flex-col">
+        <div class="font-medium text-sm text-gray-700">
+          {{ dataFetchHistory.totalItems }}
+          <span class="text-xs text-gray-400">รายการ</span>
+        </div>
+
+        <!-- Progress Bars -->
+        <div class="flex gap-1">
+          <ng-container *ngFor="let bar of dataFetchHistory.bars">
+            <div
+              class="w-1.5 h-6 rounded"
+              [ngClass]="bar === 'success' ? 'progress-bar-success' : 'progress-bar-error'"
+            ></div>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="flex flex-col gap-[1px]">
+        <!-- Success -->
+        <div class="font-medium text-[10px] text-gray-400">สำเร็จ</div>
+        <div class="flex items-center text-xs">
+          <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+          <span class="font-medium text-gray-900 pl-1.5"
+            >{{ dataFetchHistory.successPercentage }}%</span
+          >
+          <span class="text-gray-500 pl-4"
+            >{{ dataFetchHistory.successCount }} รายการ</span
+          >
+        </div>
+
+        <!-- Error -->
+        <div class="font-medium text-[10px] text-gray-400">ล้มเหลว</div>
+        <div class="flex items-center text-xs">
+          <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+          <span class="font-medium text-gray-900 pl-1.5"
+            >{{ dataFetchHistory.errorPercentage }}%</span
+          >
+          <span class="text-gray-500 pl-4"
+            >{{ dataFetchHistory.errorCount }} รายการ</span
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      class="rounded-xl border border-gray-200 p-4 flex flex-col align-middle gap-2"
+    >
+      <p class="text-xs font-normal text-gray-400">ผู้ที่สั่งดึงข้อมูล</p>
+      <div class="flex items-center gap-3">
+        <div
+          class="avatar"
+          [ngClass]="{'system-avatar': dataFetchHistory.executor.name === 'System'}"
+        >
+          <span *ngIf="dataFetchHistory.executor.name !== 'System'"
+            >{{ dataFetchHistory.executor.initials }}</span
+          >
+          <i
+            *ngIf="dataFetchHistory.executor.name === 'System'"
+            class="pi pi-cog"
+          ></i>
+        </div>
+        <div class="flex flex-col gap-0.5">
+          <div class="font-medium text-sm text-gray-900">
+            {{ dataFetchHistory.executor.name }}
+          </div>
+          <p class="text-xs">olivia.r&#64;thaibev.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="flex gap-2">
+        <i class="pi pi-pencil text-gray-400"></i>
+        <p class="text-sm font-medium text-gray-400">หมายเหตุ / โน้ต</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p class="text-sm font-normal text-gray-900">
+          ระบบใช้เวลาในการประมวลผลนานเกินกว่าที่กำหนด
+        </p>
+      </div>
+    </div>
+  </div>
+  <ng-template #footer>
+    <div class="flex justify-end items-center gap-4 px-4">
+      <p-button
+        label="ปิด"
+        size="small"
+        severity="success"
+        class="button-close"
+        (click)="closeCallback($event)"
+      />
+    </div>
+  </ng-template>
+</p-drawer>
+<p-button
+  icon="pi pi-file-edit text-gray-400"
+  [text]="true"
+  (click)="visible = true"
+  severity="secondary"
+  size="large"
+  pTooltip="ดูรายละเอียด"
+  tooltipPosition="top"
+/>
