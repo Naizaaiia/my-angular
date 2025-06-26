@@ -23,18 +23,19 @@
       <!-- Breadcrumb -->
       <p-breadcrumb class="breadcrumb-custom" [model]="breadcrumbItems">
         <ng-template #item let-item>
-          <ng-container *ngIf="item.route; else elseBlock">
-            <a [routerLink]="item.route">
+          <ng-container *ngIf="item.routerLink; else elseBlock">
+            <a [routerLink]="item.routerLink">
               <span
                 [ngClass]="[item.icon ? item.icon : '', 'text-gray-700']"
               ></span>
-              <span class="text-gray-700">{{ item.label }}</span>
+              <span class="text-gray-500">{{ item.label }}</span>
             </a>
           </ng-container>
           <ng-template #elseBlock>
-            <a [href]="item.url">
-              <span class="text-gray-500">{{ item.label }}</span>
-            </a>
+            <span
+              [ngClass]="[item.icon ? item.icon : '', 'text-gray-700']"
+            ></span>
+            <span class="text-gray-700">{{ item.label }}</span>
           </ng-template>
         </ng-template>
       </p-breadcrumb>
